@@ -38,22 +38,19 @@ result_frame.place(x=50, y=240, width=300, height=40)
 result_label = tk.Label(result_frame, text="", font=("Arial", 12), bg="white")
 result_label.pack()
 
-def calculate_interest():
 
-    p = float(principal_entry.get())
-    
-    r = float(rate_entry.get())
-    
-    t = float(time_entry.get())
-    
-    interest = (p * r * t) / 100
-    
-    interest = round(interest, 2)
-    
-    result_label.destroy()
-    
-    result_label = tk.Label(result_frame, text=f"The interest is: {interest}", font=("Arial", 12), bg="white")
-    result_label.pack()
+def calculate_interest():
+    try:
+        p = float(principal_entry.get())
+        r = float(rate_entry.get())
+        t = float(time_entry.get())
+
+        interest = (p * r * t) / 100
+        interest = round(interest, 2)
+
+        result_label.config(text=f"The interest is: {interest}")
+    except ValueError:
+        result_label.config(text="Invalid input. Please enter valid numbers.")
 
 calculate_button.configure(command=calculate_interest)
 
